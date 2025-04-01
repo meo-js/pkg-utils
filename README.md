@@ -3,11 +3,11 @@
 </p> -->
 
 <h1 align="center">
-@meojs/utils
+@meojs/pkg-utils
 </h1>
 
 <p align="center">
-Common JavaScript/TypeScript utils.
+Tools for handling projects and libraries themselves.
 </p>
 
 <!-- <br>
@@ -26,7 +26,7 @@ Common JavaScript/TypeScript utils.
 ## Introduction
 
 ```bash
-npm i @meojs/utils
+npm i @meojs/pkg-utils
 ```
 
 ## Contributing

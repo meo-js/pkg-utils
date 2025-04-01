@@ -3,11 +3,11 @@
 </p> -->
 
 <h1 align="center">
-@meojs/utils
+@meojs/pkg-utils
 </h1>
 
 <p align="center">
-常用的 JavaScript/TypeScript 工具库。
+用于处理项目和库本身的工具。
 </p>
 
 <!-- <br>
@@ -26,7 +26,7 @@
 ## 简介
 
 ```bash
-npm i @meojs/utils
+npm i @meojs/pkg-utils
 ```
 
 ## 贡献
