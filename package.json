@@ -5,7 +5,7 @@
   "engines": {
     "node": ">=20"
   },
-  "description": "Tools for handling projects and libraries themselves.",
+  "description": "Utilities for handling projects and libraries themselves.",
   "author": {
     "name": "SmallMain",
     "email": "smallmain@outlook.com",

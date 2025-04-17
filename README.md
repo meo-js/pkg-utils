@@ -7,7 +7,7 @@
 </h1>
 
 <p align="center">
-Tools for handling projects and libraries themselves.
+Utilities for handling projects and libraries themselves.
 </p>
 
 <!-- <br>
