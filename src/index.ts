@@ -1,7 +1,13 @@
-export * from "./package-json-type.js";
-export * from "./package-json-utils.js";
-export * from "./package-manager-utils.js";
-export type { FindOptions } from "./shared.js";
-export * from "./tsconfig-type.js";
-export * from "./tsconfig-utils.js";
-export * from "./workspace-utils.js";
+/**
+ * @public
+ *
+ * @module
+ */
+// #export * from "!sub-modules"
+// #region Generated exports
+export * from "./package-json.js";
+export * from "./package-manager.js";
+export type { ResolveOptions } from "./shared.js";
+export * from "./tsconfig.js";
+export * from "./workspace.js";
+// #endregion

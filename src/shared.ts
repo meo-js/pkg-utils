@@ -1,9 +1,10 @@
-/** @ctix-generation-style default-alias-named-destructive */
+import type { detectPackageManager } from "./package-manager.js";
+import type { resolveWorkspacePath } from "./workspace.js";
 
 /**
  * 查找选项
  */
-export interface FindOptions {
+export interface ResolveOptions {
     /**
      * 传入一个正则表达式，匹配的路径段将成为查找的根目录，不会再向上查找
      *
@@ -12,15 +13,21 @@ export interface FindOptions {
     rootPattern?: RegExp;
 
     /**
-     * 从根目录向子目录查找
+     * 是否从根目录向子目录查找
+     *
+     * 注意：
+     * - {@link detectPackageManager} 会忽略该选项
+     * - {@link resolveWorkspacePath} 会忽略该选项
      *
      * @default false
      */
     startFromRoot?: boolean;
 }
 
-/** @ctix-exclude-next */
-export function parseFindOptions(opts?: FindOptions) {
+/**
+ * @internal
+ */
+export function parseResolveOptions(opts?: ResolveOptions) {
     return {
         rootPattern: opts?.rootPattern ?? /^node_modules$/u,
         startFromRoot: opts?.startFromRoot ?? false,

@@ -5,8 +5,13 @@ import {
     type TSConfig as pkg_TsConfig,
 } from "pkg-types";
 import { cwd } from "process";
-import { parseFindOptions, type FindOptions } from "./shared.js";
-import type { TsConfigJson } from "./tsconfig-type.js";
+import type * as tf from "type-fest";
+import { parseResolveOptions, type ResolveOptions } from "./shared.js";
+
+/**
+ * `tsconfig.json` 类型
+ */
+export type TsConfigJson = tf.TsConfigJson;
 
 /**
  * `tsconfig.json` 修改函数
@@ -17,13 +22,12 @@ export type TsConfigModifier = (obj: TsConfigJson) => TsConfigJson;
  * 查找并读取离传入路径最近的 `tsconfig.json` 文件
  *
  * @param path 默认为 {@link cwd()}
- * @param opts {@link FindOptions}
- *
+ * @param opts {@link ResolveOptions}
  * @throws
  */
-export async function readTsConfig(path?: string, opts?: FindOptions) {
+export async function readTsConfig(path?: string, opts?: ResolveOptions) {
     return (await pkg_readTSConfig(path, {
-        ...parseFindOptions(opts),
+        ...parseResolveOptions(opts),
         cache: false,
         try: false,
     })) as TsConfigJson;
@@ -33,13 +37,15 @@ export async function readTsConfig(path?: string, opts?: FindOptions) {
  * 查找离传入路径最近的 `tsconfig.json` 文件，返回绝对路径
  *
  * @param path 默认为 {@link cwd()}
- * @param opts {@link FindOptions}
- *
+ * @param opts {@link ResolveOptions}
  * @throws
  */
-export async function resolveTsConfigPath(path?: string, opts?: FindOptions) {
+export async function resolveTsConfigPath(
+    path?: string,
+    opts?: ResolveOptions,
+) {
     return await pkg_resolveTSConfig(path, {
-        ...parseFindOptions(opts),
+        ...parseResolveOptions(opts),
         cache: false,
         try: false,
     });
@@ -50,36 +56,34 @@ export async function resolveTsConfigPath(path?: string, opts?: FindOptions) {
  *
  * @param path 路径
  * @param obj {@link TsConfigJson} | {@link TsConfigModifier}
- * @param opts {@link FindOptions}
- *
+ * @param opts {@link ResolveOptions}
  * @throws
  */
 export async function writeTsConfig(
     path: string,
     obj: TsConfigJson | TsConfigModifier,
-    opts?: FindOptions,
+    opts?: ResolveOptions,
 ): Promise<void>;
 /**
  * 写入离 {@link cwd()} 最近的 `tsconfig.json` 文件
  *
  * @param obj {@link TsConfigJson} | {@link TsConfigModifier}
- * @param opts {@link FindOptions}
- *
+ * @param opts {@link ResolveOptions}
  * @throws
  */
 export async function writeTsConfig(
     obj: TsConfigJson | TsConfigModifier,
-    opts?: FindOptions,
+    opts?: ResolveOptions,
 ): Promise<void>;
 export async function writeTsConfig(
     arg1: string | TsConfigJson | TsConfigModifier,
-    arg2?: TsConfigJson | TsConfigModifier | FindOptions,
-    arg3?: FindOptions,
+    arg2?: TsConfigJson | TsConfigModifier | ResolveOptions,
+    arg3?: ResolveOptions,
 ) {
     const [path, obj, opts] =
         typeof arg1 === "string"
-            ? [arg1, arg2 as TsConfigJson, arg3!]
-            : [cwd(), arg1, arg2 as FindOptions | undefined];
+            ? [arg1, arg2 as TsConfigJson, arg3]
+            : [cwd(), arg1, arg2 as ResolveOptions | undefined];
 
     const data =
         typeof obj === "function" ? obj(await readTsConfig(path, opts)) : obj;

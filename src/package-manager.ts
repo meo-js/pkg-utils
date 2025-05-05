@@ -1,6 +1,7 @@
-import { prune } from "@meojs/utils";
+import { prune } from "@meojs/std/object";
 import { detect, getUserAgent } from "package-manager-detector";
 import { cwd } from "process";
+import { parseResolveOptions, type ResolveOptions } from "./shared.js";
 
 /**
  * 包管理器类型
@@ -20,22 +21,29 @@ export enum PackageManagerType {
  * 检测项目使用的包管理器
  *
  * 按优先级进行判断：
- * - `package.json` 中的 `packageManager` 字段
- * - `lock` 文件
+ * 1. 包管理器添加的安装元数据
+ * 2. 包管理器的 `lockfile` 文件
+ * 3. `package.json` 中的 `packageManager` 字段
+ * 4. `package.json` 中的 `devEngines.packageManager` 字段
  *
  * 当前支持的包管理器类型：{@link PackageManagerType}
  *
  * @param path 默认为 {@link cwd()}
+ * @param opts
  */
 export async function detectPackageManager(
     path?: string,
+    opts?: ResolveOptions,
 ): Promise<{ type: PackageManagerType; version?: string } | null> {
+    const { rootPattern } = parseResolveOptions(opts);
+
     const result = await detect({
         cwd: path ?? cwd(),
         onUnknown: pkg => ({
             name: "unknown" as never,
             agent: "unknown" as never,
         }),
+        stopDir: (currentDir: string) => rootPattern.test(currentDir),
     });
 
     if (result) {
