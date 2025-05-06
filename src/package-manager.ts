@@ -1,4 +1,5 @@
 import { prune } from "@meojs/std/object";
+import type { checked } from "@meojs/std/ts";
 import { detect, getUserAgent } from "package-manager-detector";
 import { cwd } from "process";
 import { parseResolveOptions, type ResolveOptions } from "./shared.js";
@@ -29,7 +30,7 @@ export enum PackageManagerType {
  * 当前支持的包管理器类型：{@link PackageManagerType}
  *
  * @param path 默认为 {@link cwd()}
- * @param opts
+ * @param opts {@link ResolveOptions}
  */
 export async function detectPackageManager(
     path?: string,
@@ -40,8 +41,8 @@ export async function detectPackageManager(
     const result = await detect({
         cwd: path ?? cwd(),
         onUnknown: pkg => ({
-            name: "unknown" as never,
-            agent: "unknown" as never,
+            name: "unknown" as checked,
+            agent: "unknown" as checked,
         }),
         stopDir: (currentDir: string) => rootPattern.test(currentDir),
     });
