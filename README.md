@@ -32,7 +32,7 @@ npm i @meojs/pkg-utils
 ## Contributing
 
 - Run `npm run build` to build the project.
-- Run `npm version patch && npm publish` to push a new version.
+- Run `npm run publish:version` to build and push a new version.
 
 ## License
 

@@ -35,7 +35,7 @@ export enum PackageManagerType {
 export async function detectPackageManager(
     path?: string,
     opts?: ResolveOptions,
-): Promise<{ type: PackageManagerType; version?: string } | null> {
+): Promise<{ type: PackageManagerType; cmd: string; version?: string }> {
     const { rootPattern } = parseResolveOptions(opts);
 
     const result = await detect({
@@ -61,13 +61,22 @@ export async function detectPackageManager(
                 type = result.agent as PackageManagerType;
                 break;
         }
+
+        const cmd =
+            type === PackageManagerType.Unknown
+            || type === PackageManagerType.None
+                ? "npm"
+                : type;
+
         return prune({
             type,
+            cmd,
             version: result.version,
         });
     } else {
         return {
             type: PackageManagerType.None,
+            cmd: "npm",
         };
     }
 }
