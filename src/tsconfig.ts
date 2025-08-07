@@ -1,3 +1,4 @@
+import { resolve } from "path";
 import {
     readTSConfig as pkg_readTSConfig,
     resolveTSConfig as pkg_resolveTSConfig,
@@ -26,7 +27,7 @@ export type TsConfigModifier = (obj: TsConfigJson) => TsConfigJson;
  * @throws
  */
 export async function readTsConfig(path?: string, opts?: ResolveOptions) {
-    return (await pkg_readTSConfig(path, {
+    return (await pkg_readTSConfig(resolve(cwd(), path ?? ""), {
         ...parseResolveOptions(opts),
         cache: false,
         try: false,
@@ -44,7 +45,7 @@ export async function resolveTsConfigPath(
     path?: string,
     opts?: ResolveOptions,
 ) {
-    return await pkg_resolveTSConfig(path, {
+    return await pkg_resolveTSConfig(resolve(cwd(), path ?? ""), {
         ...parseResolveOptions(opts),
         cache: false,
         try: false,
@@ -86,7 +87,9 @@ export async function writeTsConfig(
             : [cwd(), arg1, arg2 as ResolveOptions | undefined];
 
     const data =
-        typeof obj === "function" ? obj(await readTsConfig(path, opts)) : obj;
+        typeof obj === "function"
+            ? obj(await readTsConfig(resolve(cwd(), path), opts))
+            : obj;
     await pkg_writeTSConfig(
         await resolveTsConfigPath(path, opts),
         data as pkg_TsConfig,

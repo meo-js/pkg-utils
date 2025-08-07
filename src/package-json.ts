@@ -1,3 +1,4 @@
+import { resolve } from "path";
 import {
     readPackageJSON,
     resolvePackageJSON,
@@ -26,7 +27,7 @@ export type PackageJsonModifier = (obj: PackageJson) => PackageJson;
  * @throws
  */
 export async function readPackageJson(path?: string, opts?: ResolveOptions) {
-    return (await readPackageJSON(path, {
+    return (await readPackageJSON(resolve(cwd(), path ?? ""), {
         ...parseResolveOptions(opts),
         cache: false,
         try: false,
@@ -44,7 +45,7 @@ export async function resolvePackageJsonPath(
     path?: string,
     opts?: ResolveOptions,
 ) {
-    return await resolvePackageJSON(path, {
+    return await resolvePackageJSON(resolve(cwd(), path ?? ""), {
         ...parseResolveOptions(opts),
         cache: false,
         try: false,
@@ -87,7 +88,7 @@ export async function writePackageJson(
 
     const data =
         typeof obj === "function"
-            ? obj(await readPackageJson(path, opts))
+            ? obj(await readPackageJson(resolve(cwd(), path), opts))
             : obj;
     await writePackageJSON(
         await resolvePackageJsonPath(path, opts),
