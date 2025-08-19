@@ -1,4 +1,4 @@
-import { findWorkspaceDir } from "pkg-types";
+import { findWorkspaceDir } from 'pkg-types';
 
 /**
  * 查找传入路径可能的工作区，返回绝对路径
@@ -10,5 +10,5 @@ import { findWorkspaceDir } from "pkg-types";
  * 4. 最远的 package.json 文件
  */
 export async function resolveWorkspacePath(path?: string) {
-    return await findWorkspaceDir(path);
+  return await findWorkspaceDir(path);
 }

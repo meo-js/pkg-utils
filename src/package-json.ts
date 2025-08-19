@@ -1,13 +1,13 @@
-import { resolve } from "path";
+import { resolve } from 'path';
 import {
-    readPackageJSON,
-    resolvePackageJSON,
-    writePackageJSON,
-    type PackageJson as pkg_PackageJson,
-} from "pkg-types";
-import { cwd } from "process";
-import type * as tf from "type-fest";
-import { parseResolveOptions, type ResolveOptions } from "./shared.js";
+  readPackageJSON,
+  resolvePackageJSON,
+  writePackageJSON,
+  type PackageJson as pkg_PackageJson,
+} from 'pkg-types';
+import { cwd } from 'process';
+import type * as tf from 'type-fest';
+import { parseResolveOptions, type ResolveOptions } from './shared.js';
 
 /**
  * `package.json` 类型
@@ -27,11 +27,11 @@ export type PackageJsonModifier = (obj: PackageJson) => PackageJson;
  * @throws
  */
 export async function readPackageJson(path?: string, opts?: ResolveOptions) {
-    return (await readPackageJSON(resolve(cwd(), path ?? ""), {
-        ...parseResolveOptions(opts),
-        cache: false,
-        try: false,
-    })) as PackageJson;
+  return (await readPackageJSON(resolve(cwd(), path ?? ''), {
+    ...parseResolveOptions(opts),
+    cache: false,
+    try: false,
+  })) as PackageJson;
 }
 
 /**
@@ -42,14 +42,14 @@ export async function readPackageJson(path?: string, opts?: ResolveOptions) {
  * @throws
  */
 export async function resolvePackageJsonPath(
-    path?: string,
-    opts?: ResolveOptions,
+  path?: string,
+  opts?: ResolveOptions,
 ) {
-    return await resolvePackageJSON(resolve(cwd(), path ?? ""), {
-        ...parseResolveOptions(opts),
-        cache: false,
-        try: false,
-    });
+  return await resolvePackageJSON(resolve(cwd(), path ?? ''), {
+    ...parseResolveOptions(opts),
+    cache: false,
+    try: false,
+  });
 }
 
 /**
@@ -61,9 +61,9 @@ export async function resolvePackageJsonPath(
  * @throws
  */
 export async function writePackageJson(
-    path: string,
-    obj: PackageJson | PackageJsonModifier,
-    opts?: ResolveOptions,
+  path: string,
+  obj: PackageJson | PackageJsonModifier,
+  opts?: ResolveOptions,
 ): Promise<void>;
 /**
  * 写入离 {@link cwd()} 最近的 `package.json` 文件
@@ -73,25 +73,25 @@ export async function writePackageJson(
  * @throws
  */
 export async function writePackageJson(
-    obj: PackageJson | PackageJsonModifier,
-    opts?: ResolveOptions,
+  obj: PackageJson | PackageJsonModifier,
+  opts?: ResolveOptions,
 ): Promise<void>;
 export async function writePackageJson(
-    arg1: string | PackageJson | PackageJsonModifier,
-    arg2?: PackageJson | PackageJsonModifier | ResolveOptions,
-    arg3?: ResolveOptions,
+  arg1: string | PackageJson | PackageJsonModifier,
+  arg2?: PackageJson | PackageJsonModifier | ResolveOptions,
+  arg3?: ResolveOptions,
 ) {
-    const [path, obj, opts] =
-        typeof arg1 === "string"
-            ? [arg1, arg2 as PackageJson, arg3]
-            : [cwd(), arg1, arg2 as ResolveOptions | undefined];
+  const [path, obj, opts] =
+    typeof arg1 === 'string'
+      ? [arg1, arg2 as PackageJson, arg3]
+      : [cwd(), arg1, arg2 as ResolveOptions | undefined];
 
-    const data =
-        typeof obj === "function"
-            ? obj(await readPackageJson(resolve(cwd(), path), opts))
-            : obj;
-    await writePackageJSON(
-        await resolvePackageJsonPath(path, opts),
-        data as pkg_PackageJson,
-    );
+  const data =
+    typeof obj === 'function'
+      ? obj(await readPackageJson(resolve(cwd(), path), opts))
+      : obj;
+  await writePackageJSON(
+    await resolvePackageJsonPath(path, opts),
+    data as pkg_PackageJson,
+  );
 }
