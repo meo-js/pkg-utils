@@ -25,8 +25,8 @@ importers:
         specifier: ^2.0.54
         version: 2.0.54(jiti@2.5.1)(prettier-plugin-organize-imports@4.2.0(prettier@3.6.2)(typescript@5.9.2))(typescript@5.9.2)(vitest@4.0.0-beta.8(@types/node@20.19.11)(jiti@2.5.1)(yaml@2.8.1))
       '@meojs/utc':
-        specifier: ^1.18.12
-        version: 1.18.12(@types/node@20.19.11)(eslint@9.33.0(jiti@2.5.1))(jiti@2.5.1)(prettier-plugin-organize-imports@4.2.0(prettier@3.6.2)(typescript@5.9.2))(prettier@3.6.2)(stylelint@16.23.1(typescript@5.9.2))(typescript@5.9.2)(vitest@4.0.0-beta.8(@types/node@20.19.11)(jiti@2.5.1)(yaml@2.8.1))
+        specifier: ^1.18.13
+        version: 1.18.13(@types/node@20.19.11)(eslint@9.33.0(jiti@2.5.1))(jiti@2.5.1)(prettier-plugin-organize-imports@4.2.0(prettier@3.6.2)(typescript@5.9.2))(prettier@3.6.2)(stylelint@16.23.1(typescript@5.9.2))(typescript@5.9.2)(vitest@4.0.0-beta.8(@types/node@20.19.11)(jiti@2.5.1)(yaml@2.8.1))
       '@types/node':
         specifier: ^20
         version: 20.19.11
@@ -624,8 +624,8 @@ packages:
     resolution: {integrity: sha512-JZvt3vJL0aRxbDGwQx9JrS//zcI9bGsGa26xfEwA68HU9q6WljnlaczdiXILokDmwT0LjF4iTiUY/yY3avf7hw==}
     engines: {node: '>=20'}
 
-  '@meojs/utc@1.18.12':
-    resolution: {integrity: sha512-OMXIbtcZWyQ4WzyDNqhXAFr6wXj9DE6QSfA8lYXsl+Phegs3snYf6KbWHNU53g0QhakdRymJVNv8VOc1ed5AmQ==}
+  '@meojs/utc@1.18.13':
+    resolution: {integrity: sha512-wotmARo8cP0AauHjcK9CHKPk3za8lrIB+kVeCSXL9yzxq56uEUIpZ17YSj8V0/OAF7yx0VkElM4AlP4n6CSePw==}
     engines: {node: '>=20.19.0'}
     hasBin: true
     peerDependencies:
@@ -2912,7 +2912,7 @@ snapshots:
       string-ts: 2.2.1
       type-fest: 4.41.0
 
-  '@meojs/utc@1.18.12(@types/node@20.19.11)(eslint@9.33.0(jiti@2.5.1))(jiti@2.5.1)(prettier-plugin-organize-imports@4.2.0(prettier@3.6.2)(typescript@5.9.2))(prettier@3.6.2)(stylelint@16.23.1(typescript@5.9.2))(typescript@5.9.2)(vitest@4.0.0-beta.8(@types/node@20.19.11)(jiti@2.5.1)(yaml@2.8.1))':
+  '@meojs/utc@1.18.13(@types/node@20.19.11)(eslint@9.33.0(jiti@2.5.1))(jiti@2.5.1)(prettier-plugin-organize-imports@4.2.0(prettier@3.6.2)(typescript@5.9.2))(prettier@3.6.2)(stylelint@16.23.1(typescript@5.9.2))(typescript@5.9.2)(vitest@4.0.0-beta.8(@types/node@20.19.11)(jiti@2.5.1)(yaml@2.8.1))':
     dependencies:
       '@arethetypeswrong/core': 0.18.2
       '@commitlint/config-conventional': 19.8.1

@@ -45,7 +45,7 @@
   },
   "devDependencies": {
     "@meojs/cfgs": "^2.0.54",
-    "@meojs/utc": "^1.18.12",
+    "@meojs/utc": "^1.18.13",
     "@types/node": "^20",
     "eslint": "^9.33.0",
     "prettier": "^3.6.2",
