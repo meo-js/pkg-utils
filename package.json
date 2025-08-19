@@ -44,7 +44,7 @@
     "publish:major": "npm version major && npm publish"
   },
   "devDependencies": {
-    "@meojs/cfgs": "^2.0.52",
+    "@meojs/cfgs": "^2.0.53",
     "@meojs/utc": "^1.18.5",
     "@types/node": "^20",
     "eslint": "^9.33.0",
