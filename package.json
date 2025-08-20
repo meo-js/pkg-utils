@@ -3,7 +3,7 @@
   "version": "1.0.15",
   "packageManager": "pnpm@10.14.0",
   "engines": {
-    "node": ">=20.19.0"
+    "node": ">=20"
   },
   "description": "Utilities for handling projects and libraries themselves.",
   "author": {
