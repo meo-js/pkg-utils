@@ -1,4 +1,6 @@
+import { normalize, resolve } from 'path';
 import { findWorkspaceDir } from 'pkg-types';
+import { cwd } from 'process';
 
 /**
  * 查找传入路径可能的工作区，返回绝对路径
@@ -9,6 +11,10 @@ import { findWorkspaceDir } from 'pkg-types';
  * 3. 最远的 lockfile
  * 4. 最远的 package.json 文件
  */
-export async function resolveWorkspacePath(path?: string) {
-  return await findWorkspaceDir(path);
+export async function resolveWorkspacePath(path?: string): Promise<string> {
+  const dir = await findWorkspaceDir(path);
+  if (normalize(resolve(path ?? cwd())) === normalize(dir)) {
+    throw new Error('Path is already the workspace root.');
+  }
+  return dir;
 }
