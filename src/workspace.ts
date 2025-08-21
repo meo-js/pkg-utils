@@ -1,4 +1,5 @@
 import { parseYAML } from 'confbox';
+import { readFile } from 'fs/promises';
 import { glob } from 'glob';
 import { join } from 'path';
 import { findWorkspaceDir } from 'pkg-types';
@@ -37,7 +38,7 @@ export async function resolveWorkspace(
   // TODO: wait for https://github.com/unjs/pkg-types/pull/247
   const dir = await findWorkspaceDir(path);
   const obj = parseYAML<{ packages: string[] }>(
-    join(dir, 'pnpm-workspace.yaml'),
+    await readFile(join(dir, 'pnpm-workspace.yaml'), 'utf-8'),
   );
 
   const packages = await glob(
