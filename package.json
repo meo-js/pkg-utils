@@ -1,6 +1,6 @@
 {
   "name": "@meojs/pkg-utils",
-  "version": "1.0.25",
+  "version": "1.0.26",
   "packageManager": "pnpm@10.14.0",
   "engines": {
     "node": ">=20"
