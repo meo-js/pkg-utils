@@ -11,6 +11,9 @@ importers:
       '@meojs/std':
         specifier: ^1.0.9
         version: 1.0.9
+      confbox:
+        specifier: ^0.2.2
+        version: 0.2.2
       package-manager-detector:
         specifier: ^1.3.0
         version: 1.3.0

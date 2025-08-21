@@ -1,6 +1,25 @@
-import { normalize, resolve } from 'path';
+import { parseYAML } from 'confbox';
+import { join } from 'path';
 import { findWorkspaceDir } from 'pkg-types';
-import { cwd } from 'process';
+
+export type WorkspaceType =
+  | 'npm'
+  | 'pnpm'
+  | 'yarn'
+  | 'bun'
+  | 'lerna'
+  | 'nx'
+  | 'rush'
+  | 'turbo'
+  | 'deno';
+
+export interface WorkspaceConfig {
+  type: WorkspaceType;
+  rootDir: string;
+  configPath: string;
+  packages: string[];
+  config: unknown;
+}
 
 /**
  * 查找传入路径可能的工作区，返回绝对路径
@@ -11,10 +30,19 @@ import { cwd } from 'process';
  * 3. 最远的 lockfile
  * 4. 最远的 package.json 文件
  */
-export async function resolveWorkspacePath(path?: string): Promise<string> {
+export async function resolveWorkspacePath(
+  path?: string,
+): Promise<WorkspaceConfig> {
+  // TODO: wait for https://github.com/unjs/pkg-types/pull/247
   const dir = await findWorkspaceDir(path);
-  if (normalize(resolve(path ?? cwd())) === normalize(dir)) {
-    throw new Error('Path is already the workspace root.');
-  }
-  return dir;
+  const obj = parseYAML<{ packages: string[] }>(
+    join(dir, 'pnpm-workspace.yaml'),
+  );
+  return {
+    type: 'pnpm',
+    rootDir: dir,
+    configPath: join(dir, 'pnpm-workspace.yaml'),
+    packages: obj.packages,
+    config: obj,
+  };
 }
