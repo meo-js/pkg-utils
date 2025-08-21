@@ -1,5 +1,5 @@
 import type { detectPackageManager } from './package-manager.js';
-import type { resolveWorkspacePath } from './workspace.js';
+import type { resolveWorkspace } from './workspace.js';
 
 /**
  * 查找选项
@@ -17,7 +17,7 @@ export interface ResolveOptions {
    *
    * 注意：
    * - {@link detectPackageManager} 会忽略该选项
-   * - {@link resolveWorkspacePath} 会忽略该选项
+   * - {@link resolveWorkspace} 会忽略该选项
    *
    * @default false
    */

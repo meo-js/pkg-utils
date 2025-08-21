@@ -30,7 +30,7 @@ export interface WorkspaceConfig {
  * 3. 最远的 lockfile
  * 4. 最远的 package.json 文件
  */
-export async function resolveWorkspacePath(
+export async function resolveWorkspace(
   path?: string,
 ): Promise<WorkspaceConfig> {
   // TODO: wait for https://github.com/unjs/pkg-types/pull/247
