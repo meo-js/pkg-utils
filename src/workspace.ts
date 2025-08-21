@@ -1,4 +1,5 @@
 import { parseYAML } from 'confbox';
+import { glob } from 'glob';
 import { join } from 'path';
 import { findWorkspaceDir } from 'pkg-types';
 
@@ -38,11 +39,21 @@ export async function resolveWorkspace(
   const obj = parseYAML<{ packages: string[] }>(
     join(dir, 'pnpm-workspace.yaml'),
   );
+
+  const packages = await glob(
+    obj.packages.map(v => (v.endsWith('/') ? v : `${v}/`)),
+    {
+      cwd: dir,
+      absolute: true,
+      nodir: false,
+    },
+  );
+
   return {
     type: 'pnpm',
     rootDir: dir,
     configPath: join(dir, 'pnpm-workspace.yaml'),
-    packages: obj.packages,
+    packages: packages,
     config: obj,
   };
 }
