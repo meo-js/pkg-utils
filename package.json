@@ -44,7 +44,7 @@
     "publish:major": "pnpm version major && pnpm publish"
   },
   "devDependencies": {
-    "@meojs/cfgs": "^2.0.62",
+    "@meojs/cfgs": "^2.0.63",
     "@meojs/utc": "^1.18.44",
     "@types/node": "^20",
     "eslint": "^9.34.0",
